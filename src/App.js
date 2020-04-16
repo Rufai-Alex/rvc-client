@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
+
+import AppRouter from "./router";
 
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <h2>Hello</h2>
-    </div>
+    <AppRouter />
   );
-}
+};
 
 export default App;
