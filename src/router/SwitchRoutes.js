@@ -1,5 +1,6 @@
-import React from "react";
-import {Route, Switch} from "react-router-dom";
+/* eslint-disable react/no-array-index-key */
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 /*
   SwitchRoutes takes in the routes from a routes config, 
@@ -8,23 +9,26 @@ import {Route, Switch} from "react-router-dom";
   component. Must be used with a Switch import
 */
 
-const SwitchRoutes = ({routes}) => {
+const RouteWithSubRoutes = route => {
+  return (
+    <Route
+      exact={route.path === '/' ? true : null}
+      path={route.path}
+      render={
+        route.render
+          ? route.render
+          : props => <route.component {...props} routes={route.routes} />
+      }
+    />
+  );
+};
+
+const SwitchRoutes = ({ routes }) => {
   return (
     <Switch>
-      {routes.map((route, index) => {
-        return (
-          <Route
-            exact={route.path === "/" ? true : null}
-            key={index}
-            path={route.path}
-            render={
-              route.render
-                ? route.render
-                : props => <route.component {...props} routes={route.routes} />
-            }
-          />
-        );
-      })}
+      {routes.map((route, i) => (
+        <RouteWithSubRoutes key={i} {...route} />
+      ))}
     </Switch>
   );
 };
