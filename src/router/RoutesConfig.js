@@ -28,7 +28,7 @@ const RoutesConfig = [
   // },
   {
     path: '*',
-    component: PageNotFound,
+    component: PageNotFound
   },
 ];
 
